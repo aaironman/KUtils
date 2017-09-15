@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -44,3 +45,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:' + rootProject.glideLibVersion
     compile 'com.tbruyelle.rxpermissions:rxpermissions:' + rootProject.rxpermissionsLibVersion
 }
+
+//https://github.com/panpf/android-library-publish-to-jcenter jcenter上传方法
