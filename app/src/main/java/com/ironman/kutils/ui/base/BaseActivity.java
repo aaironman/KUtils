@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -67,6 +68,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         addSubscription(subscribe);
     }
 
+    public void initToolBar(Toolbar toolbar, boolean isShowBackIcon) {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(isShowBackIcon);
+    }
 
     public ProgressDialog getProgressDialog() {
         if (pg == null) {

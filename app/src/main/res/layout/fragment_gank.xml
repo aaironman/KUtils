@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppToolbarStyle">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/AppToolbarTextStyle"
+            android:layout_below="@id/toolbar"
+            android:layout_gravity="center"
+            android:text="干货集中营"
+            android:textColor="@color/white"/>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

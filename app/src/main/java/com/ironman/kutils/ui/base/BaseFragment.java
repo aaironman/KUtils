@@ -2,6 +2,9 @@ package com.ironman.kutils.ui.base;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import butterknife.Unbinder;
 import rx.Subscription;
@@ -33,7 +36,17 @@ public class BaseFragment extends Fragment {
 		}
 		return pg;
 	}
-	
+
+	public void initToolbar(Toolbar toolbar, boolean isShowBackIcon) {
+		AppCompatActivity mAppCompatActivity = (AppCompatActivity) getActivity();
+		mAppCompatActivity.setSupportActionBar(toolbar);
+		ActionBar actionBar = mAppCompatActivity.getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayShowTitleEnabled(false);
+			actionBar.setDisplayHomeAsUpEnabled(isShowBackIcon);
+		}
+	}
+
 	public void setUnBinder(Unbinder unBinder) {
 		mUnBinder = unBinder;
 	}

@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 
@@ -49,6 +49,6 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:' + rootProject.rxpermissionsLibVersion
 }
 
-apply from: "https://raw.githubusercontent.com/aaironman/KUtils/master/bintrayUpload.gradle"
+//apply from: "https://raw.githubusercontent.com/aaironman/KUtils/master/bintrayUpload.gradle"
 
 //https://github.com/panpf/android-library-publish-to-jcenter jcenter上传方法

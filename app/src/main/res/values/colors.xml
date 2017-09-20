@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
 
 
@@ -10,4 +10,15 @@
     <color name="black">#000000</color>
     <color name="item_press_color">#25000000</color>
     <color name="background_color">#EDEDED</color>
+
+
+    <!--深灰字体颜色-->
+    <color name="dark_gray_text_color">#777777</color>
+    <color name="gray_text_color">#9B9B9B</color>
+    <color name="gray_line_color">#D0D0D0</color>
+
+    <!--黑色字体颜色-->
+    <color name="black_text_color">#000000</color>
+    <!--浅黑字体颜色-->
+    <color name="light_black_text_color">#333333</color>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/ic_zhihu"
+        id="@+id/tab_home"
+        title="知乎日报"/>
+    <tab
+        icon="@drawable/ic_wechat"
+        id="@+id/tab_wechat"
+        title="微信精选"/>
+    <tab
+        icon="@drawable/ic_gank"
+        id="@+id/tab_gank"
+        title="干货集中营"/>
+    <tab
+        icon="@drawable/ic_gold"
+        id="@+id/tab_gold"
+        title="稀土掘金"/>
+</tabs>
