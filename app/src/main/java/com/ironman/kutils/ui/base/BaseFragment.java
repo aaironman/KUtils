@@ -6,15 +6,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.ironman.kutils.utils.SystemBarHelper;
+
 import butterknife.Unbinder;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * 作者: 冯浩
- * 时间: 2017/9/7
- * 描述: BaseFragment
- */
+
 public class BaseFragment extends Fragment {
 	
 	private CompositeSubscription mCompositeSubscription;
@@ -44,6 +42,8 @@ public class BaseFragment extends Fragment {
 		if (actionBar != null) {
 			actionBar.setDisplayShowTitleEnabled(false);
 			actionBar.setDisplayHomeAsUpEnabled(isShowBackIcon);
+			SystemBarHelper.immersiveStatusBar(getActivity(), 0);
+			SystemBarHelper.setHeightAndPadding(getActivity(), toolbar);
 		}
 	}
 

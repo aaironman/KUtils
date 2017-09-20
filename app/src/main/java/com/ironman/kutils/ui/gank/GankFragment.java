@@ -35,7 +35,7 @@ public class GankFragment extends LazyFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gank, null);
-        setUnBinder(ButterKnife.bind(view));
+        setUnBinder(ButterKnife.bind(this,view));
         return view;
     }
 

@@ -36,7 +36,7 @@ public class HomeFragment extends LazyFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_zhihu, null);
-        setUnBinder(ButterKnife.bind(view));
+        setUnBinder(ButterKnife.bind(this,view));
         return view;
     }
 

@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.ironman.kutils.model.event.EventModel;
 import com.ironman.kutils.utils.RxBus;
+import com.ironman.kutils.utils.SystemBarHelper;
 import com.jude.swipbackhelper.SwipeBackHelper;
 
 import butterknife.Unbinder;
@@ -72,6 +73,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(isShowBackIcon);
+        SystemBarHelper.immersiveStatusBar(this, 0);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
     }
 
     public ProgressDialog getProgressDialog() {

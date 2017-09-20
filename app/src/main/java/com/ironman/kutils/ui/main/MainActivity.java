@@ -60,15 +60,12 @@ public class MainActivity extends BaseActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-//                        SystemBarHelper.setStatusBarDarkMode(MainActivity.this,false);
                         pager.setCurrentItem(TAB_POSITION_HOME, false);
                         break;
                     case R.id.tab_wechat:
-//                        SystemBarHelper.setStatusBarDarkMode(MainActivity.this,true);
                         pager.setCurrentItem(TAB_POSITION_WECHAT, false);
                         break;
                     case R.id.tab_gank:
-//                        SystemBarHelper.setStatusBarDarkMode(MainActivity.this,false);
                         pager.setCurrentItem(TAB_POSITION_GANK, false);
                         break;
                     case R.id.tab_gold:
