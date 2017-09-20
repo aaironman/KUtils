@@ -47,6 +47,8 @@ dependencies {
     compile 'com.jude:swipebackhelper:' + rootProject.swipebackhelperLibVersion
     compile 'com.github.bumptech.glide:glide:' + rootProject.glideLibVersion
     compile 'com.tbruyelle.rxpermissions:rxpermissions:' + rootProject.rxpermissionsLibVersion
+    compile 'com.astuetz:pagerslidingtabstrip:' + rootProject.pagerslidingtabstripLibVersion
+    compile 'in.srain.cube:ultra-ptr:' + rootProject.ultraPtrLibVersion
 }
 
 //apply from: "https://raw.githubusercontent.com/aaironman/KUtils/master/bintrayUpload.gradle"

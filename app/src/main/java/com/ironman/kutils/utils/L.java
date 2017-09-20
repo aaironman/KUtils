@@ -6,8 +6,8 @@ import com.ironman.kutils.BuildConfig;
 
 
 /**
- * 作者: 冯浩
- * 时间: 2017/9/7
+ * 作者: miaocong
+ * 时间: 2017/9/20
  * 描述: Log统一管理类
  */
 public class L {

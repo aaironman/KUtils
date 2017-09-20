@@ -5,8 +5,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * rxJava 工具类
- * Created by 冯浩 on 2016/11/30.
+ * 作者: miaocong
+ * 时间: 2017/9/20
+ * 描述: rxJava 工具类
  */
 public class RxUtils {
 

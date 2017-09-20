@@ -16,10 +16,6 @@
 package com.ironman.kutils.data.network.rxJavaCallAdapter;
 
 
-import com.ironman.kutils.data.network.SsidException;
-import com.ironman.kutils.model.HttpResultModel;
-import com.ironman.kutils.utils.Constants;
-
 import retrofit2.Response;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -56,24 +52,7 @@ final class BodyOnSubscribe<T> implements OnSubscribe<T> {
 		@Override
 		public void onNext(Response<R> response) {
 			if (response.isSuccessful()) {
-				if (response.body() instanceof HttpResultModel) {
-					HttpResultModel result = (HttpResultModel) response.body();
-					if (result.getResultCode() == Constants.SSID_IS_INVALID_ERROR) {
-						subscriberTerminated = true;
-						Throwable t = new SsidException(response);
-						try {
-							subscriber.onError(t);
-						} catch (Throwable inner) {
-							Exceptions.throwIfFatal(inner);
-							CompositeException composite = new CompositeException(t, inner);
-							RxJavaPlugins.getInstance().getErrorHandler().handleError(composite);
-						}
-					} else {
-						subscriber.onNext(response.body());
-					}
-				}else {
-					subscriber.onNext(response.body());
-				}
+				subscriber.onNext(response.body());
 			} else {
 				subscriberTerminated = true;
 				Throwable t = new HttpException(response);

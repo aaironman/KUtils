@@ -10,7 +10,9 @@ import com.ironman.kutils.ui.base.MvpView;
 
 
 /**
- * Created by 冯浩 on 2016/12/6.
+ * 作者: miaocong
+ * 时间: 2017/9/20
+ * 描述:
  */
 public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V>>
         implements FragmentMvpDelegate<V, P> {

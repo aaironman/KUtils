@@ -9,9 +9,10 @@ import android.view.WindowManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 /**
- * Created by wangchende on 15-9-7.
+ * 作者: miaocong
+ * 时间: 2017/9/20
+ * 描述: 魅族系统状态栏颜色类
  */
 public class StatusbarColorUtils {
     private static Method mSetStatusBarColorIcon;

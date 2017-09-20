@@ -5,8 +5,8 @@ import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
 
 /**
- * 作者: 冯浩
- * 时间: 2017/9/7
+ * 作者: miaocong
+ * 时间: 2017/9/20
  * 描述: RxBus
  */
 public final class RxBus {

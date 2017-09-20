@@ -12,7 +12,11 @@ import butterknife.Unbinder;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-
+/**
+ * 作者: miaocong
+ * 时间: 2017/9/20
+ * 描述: 
+ */
 public class BaseFragment extends Fragment {
 	
 	private CompositeSubscription mCompositeSubscription;

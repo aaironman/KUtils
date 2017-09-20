@@ -1,8 +1,8 @@
 package com.ironman.kutils.ui.base;
 
 /**
- * 作者: 冯浩
- * 时间: 2017/9/7
+ * 作者: miaocong
+ * 时间: 2017/9/20
  * 描述: 下拉刷新和加载更多
  */
 public interface RLView<T> extends MvpView{
