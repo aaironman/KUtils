@@ -1,6 +1,13 @@
 package com.ironman.kutils.data.network;
 
-import java.io.IOException;
+import android.net.ParseException;
+
+import com.google.gson.JsonParseException;
+import com.ironman.kutils.data.network.rxJavaCallAdapter.HttpException;
+
+import org.json.JSONException;
+
+import java.net.ConnectException;
 
 /**
  * 作者: 冯浩
@@ -25,12 +32,19 @@ public class ExceptionHandle {
 
 	public static ResponseThrowable handleException(Throwable e) {
 		ResponseThrowable ex;
-		if (e instanceof IOException) {
-			IOException ioException = (IOException) e;
-			ex = new ResponseThrowable(ioException, NETWORK_ERROR);
+		if (e instanceof HttpException
+				||e instanceof ConnectException) {
+			Exception exception = (Exception) e;
+			ex = new ResponseThrowable(exception, NETWORK_ERROR);
 			ex.message = "网络错误";
 			return ex;
-		} else {
+		} else if (e instanceof JsonParseException
+				|| e instanceof JSONException
+				|| e instanceof ParseException){
+			ex = new ResponseThrowable(e, UNEXPECTED);//均视为解析错误
+			ex.message = "解析错误";
+			return ex;
+		}else {
 			ex = new ResponseThrowable(e, UNEXPECTED);
 			ex.message = "未知错误";
 			return ex;

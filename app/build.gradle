@@ -49,6 +49,7 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:' + rootProject.rxpermissionsLibVersion
     compile 'com.astuetz:pagerslidingtabstrip:' + rootProject.pagerslidingtabstripLibVersion
     compile 'in.srain.cube:ultra-ptr:' + rootProject.ultraPtrLibVersion
+    compile 'com.youth.banner:banner:' + rootProject.bannerLibVersion
 }
 
 //apply from: "https://raw.githubusercontent.com/aaironman/KUtils/master/bintrayUpload.gradle"

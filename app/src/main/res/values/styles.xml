@@ -93,4 +93,81 @@
         <item name="android:activityCloseEnterAnimation">@anim/bottom_in</item>
         <item name="android:activityCloseExitAnimation">@anim/bottom_out</item>
     </style>
+
+
+    <!--黑色字体-->
+    <style name="AppTextMicroBlack">
+        <item name="android:textColor">@color/black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_micro</item>
+    </style>
+
+    <style name="AppTextSmallBlack">
+        <item name="android:textColor">@color/black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_small</item>
+    </style>
+
+    <style name="AppTextTinyBlack">
+        <item name="android:textColor">@color/black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_tiny</item>
+    </style>
+    <!--浅黑色字体-->
+    <style name="AppTextMicroLightBlack">
+        <item name="android:textColor">@color/light_black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_micro</item>
+    </style>
+
+    <style name="AppTextSmallLightBlack">
+        <item name="android:textColor">@color/light_black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_small</item>
+    </style>
+
+    <style name="AppTextTinyLightBlack">
+        <item name="android:textColor">@color/light_black_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_tiny</item>
+    </style>
+    <!--灰色字体-->
+    <style name="AppTextMicroGray">
+        <item name="android:textColor">@color/gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_micro</item>
+    </style>
+
+    <style name="AppTextSmallGray">
+        <item name="android:textColor">@color/gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_small</item>
+    </style>
+
+    <style name="AppTextTinyGray">
+        <item name="android:textColor">@color/gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_tiny</item>
+    </style>
+    <!--深灰字体-->
+    <style name="AppTextMicroDarkGray">
+        <item name="android:textColor">@color/dark_gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_micro</item>
+    </style>
+
+    <style name="AppTextSmallDarkGray">
+        <item name="android:textColor">@color/dark_gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_small</item>
+    </style>
+
+    <style name="AppTextTinyDarkGray">
+        <item name="android:textColor">@color/dark_gray_text_color</item>
+        <item name="android:textSize">@dimen/tv_size_tiny</item>
+    </style>
+    <!--白色字体-->
+    <style name="AppTextMicroWhite">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/tv_size_micro</item>
+    </style>
+
+    <style name="AppTextSmallWhite">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/tv_size_small</item>
+    </style>
+
+    <style name="AppTextTinyWhite">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/tv_size_tiny</item>
+    </style>
 </resources>
