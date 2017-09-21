@@ -45,5 +45,7 @@ ext {
     pagerslidingtabstripLibVersion = "1.0.1"
     ultraPtrLibVersion = "1.0.11"
     bannerLibVersion = "1.4.10"
+    glideTransformationsLibVersion = "3.0.1"
+    recyclerviewSwipeLibVersion = "1.1.2"
 }
 

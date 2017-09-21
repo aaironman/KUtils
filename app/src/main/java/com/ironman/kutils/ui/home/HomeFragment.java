@@ -57,6 +57,7 @@ public class HomeFragment extends LazyFragment {
     private void initView(){
         pagerAdapter = new ZhihuPagerAdapter(getChildFragmentManager());
         pager.setAdapter(pagerAdapter);
+        pager.setOffscreenPageLimit(4);
 
         pstTab.setViewPager(pager);
     }
