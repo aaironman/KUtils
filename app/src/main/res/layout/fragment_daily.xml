@@ -23,7 +23,7 @@
             app:msv_loadingView="@layout/loading_view"
             app:msv_viewState="loading">
 
-            <android.support.v7.widget.RecyclerView
+            <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
                 android:id="@+id/rv_daily"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

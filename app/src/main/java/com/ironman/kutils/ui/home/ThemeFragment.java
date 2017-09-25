@@ -65,7 +65,7 @@ public class ThemeFragment extends MvpLazyFragment<ThemeView, ThemePresenter> im
     private void initView(){
         adapter = new ThemeAdapter(getActivity());
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
-        rvTheme.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color)));
+        rvTheme.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),15,5));
         rvTheme.setLayoutManager(layoutManager);
         rvTheme.setAdapter(adapter);
 

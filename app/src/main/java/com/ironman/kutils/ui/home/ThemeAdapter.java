@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ironman.kutils.R;
 import com.ironman.kutils.model.zhihuModel.ThemeListBean;
-import com.ironman.kutils.utils.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +59,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
     public void onBindViewHolder(ThemeViewHolder holder, int position) {
         ThemeListBean.OthersBean othersBean = mList.get(position);
         holder.tvTitle.setText(othersBean.getName());
-        ViewGroup.LayoutParams lp = holder.ivPhoto.getLayoutParams();
-        lp.width = (DensityUtil.getScreenWidth(mContext) - DensityUtil.dip2px(mContext,12))/2;
-        lp.height = (int) (lp.width*0.8);
         Glide.with(mContext).load(othersBean.getThumbnail())
-                .apply(bitmapTransform(new RoundedCornersTransformation(8,0)))
+                .apply(bitmapTransform(new RoundedCornersTransformation(16,0)))
                 .into(holder.ivPhoto);
     }
 
@@ -75,8 +70,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
     }
 
     static class ThemeViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.rl_content)
-        RelativeLayout rlContent;
         @BindView(iv_photo)
         ImageView ivPhoto;
         @BindView(R.id.tv_title)
