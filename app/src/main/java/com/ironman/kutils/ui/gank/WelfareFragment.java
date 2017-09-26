@@ -2,7 +2,6 @@ package com.ironman.kutils.ui.gank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,8 @@ import com.ironman.kutils.model.gankModel.GankItemBean;
 import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
+import com.ironman.kutils.widget.recylerview.DividerGridItemDecoration;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
 
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresente
         adapter = new GirlAdapter(getActivity());
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        rvDaily.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),8, 8));
+        rvDaily.addItemDecoration(new DividerGridItemDecoration(getActivity(),R.drawable.line_divider,8));
         rvDaily.setLayoutManager(layoutManager);
 
 

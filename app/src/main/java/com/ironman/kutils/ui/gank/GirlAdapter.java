@@ -62,7 +62,6 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.GirlViewHolder
     @Override
     public void onBindViewHolder(GirlViewHolder holder, int position) {
         GankItemBean gankItemBean = mList.get(position);
-//        Glide.with(mContext).load(gankItemBean.getUrl()).into(holder.ivPhoto);
         if (mList.get(holder.getAdapterPosition()).getHeight() > 0) {
             ViewGroup.LayoutParams layoutParams = holder.ivPhoto.getLayoutParams();
             layoutParams.height = mList.get(holder.getAdapterPosition()).getHeight();
