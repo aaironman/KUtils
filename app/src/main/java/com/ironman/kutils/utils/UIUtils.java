@@ -55,7 +55,8 @@ public class UIUtils {
      * @param recyclerView
      *
      */
-    public static void recycleViewLoadForMore(Context context, SwipeMenuRecyclerView recyclerView, RecyclerFooterView footView) {
+    public static void recycleViewLoadForMore(Context context, SwipeMenuRecyclerView recyclerView) {
+        RecyclerFooterView footView = new RecyclerFooterView(context);
         // 自定义的核心就是DefineLoadMoreView类。
         recyclerView.addFooterView(footView); // 添加为Footer。
         recyclerView.setLoadMoreView(footView); // 设置LoadMoreView更新监听。

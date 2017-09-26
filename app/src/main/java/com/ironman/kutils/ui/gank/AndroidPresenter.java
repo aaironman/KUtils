@@ -1,8 +1,8 @@
-package com.ironman.kutils.ui.wechat;
+package com.ironman.kutils.ui.gank;
 
 import com.ironman.kutils.data.network.ExceptionHandle;
-import com.ironman.kutils.model.wechatModel.WXHttpResponse;
-import com.ironman.kutils.model.wechatModel.WXItemBean;
+import com.ironman.kutils.model.gankModel.GankHttpResponse;
+import com.ironman.kutils.model.gankModel.GankItemBean;
 import com.ironman.kutils.ui.base.MvpRxPresenter;
 import com.ironman.kutils.utils.Constants;
 import com.ironman.kutils.utils.RxUtils;
@@ -14,23 +14,25 @@ import rx.Subscription;
 
 /**
  * 作者: miaocong
- * 时间: 2017/9/25
+ * 时间: 2017/9/26
  * 描述:
  */
-public class WechatPresenter extends MvpRxPresenter<WechatView> {
+public class AndroidPresenter extends MvpRxPresenter<AndroidView> {
 
     private int mPage = 1;
     private int mPageTotal = 1;
     private boolean isNoMoreDatas;
+    private String tech;
 
-    public void initData(boolean pullToRefresh) {
+    public void initData(String tech,boolean pullToRefresh) {
         if (pullToRefresh)
             getView().showLoading();
 
         isNoMoreDatas = false;
         mPage = 1;
         mPageTotal = 1;
-        requestData(mPage, false);
+        this.tech = tech;
+        requestData(tech,mPage, false);
     }
 
     public void loadForMore() {
@@ -38,16 +40,16 @@ public class WechatPresenter extends MvpRxPresenter<WechatView> {
             return;
         }
         mPage += 1;
-        requestData(mPage, true);
+        requestData(tech,mPage, true);
     }
 
-    private void requestData(int page, final boolean isLoadForMore) {
+    private void requestData(String tech,int page, final boolean isLoadForMore) {
 
         if (isNoMoreDatas){
             return;
         }
 
-        Subscription subscribe = RxUtils.toObservableNoRetry(wechatApi.getWXHot(Constants.KEY_API,Constants.PAGE_SIZE,page)).subscribe(new Subscriber<WXHttpResponse<List<WXItemBean>>>() {
+        Subscription subscribe = RxUtils.toObservableNoRetry(gankApi.getTechList(tech,Constants.PAGE_SIZE,page)).subscribe(new Subscriber<GankHttpResponse<List<GankItemBean>>>() {
             @Override
             public void onCompleted() {
                 getView().hideLoading();
@@ -61,10 +63,10 @@ public class WechatPresenter extends MvpRxPresenter<WechatView> {
             }
 
             @Override
-            public void onNext(WXHttpResponse<List<WXItemBean>> data) {
-                if (data.getCode() == Constants.SUCCESS) {
+            public void onNext(GankHttpResponse<List<GankItemBean>> data) {
+                if (!data.getError()) {
 
-                    List<WXItemBean> list = data.getNewslist();
+                    List<GankItemBean> list = data.getResults();
 
                     if (list.size() == 0) {
 
@@ -77,7 +79,7 @@ public class WechatPresenter extends MvpRxPresenter<WechatView> {
 
                     } else {
 
-                        if (data.getNewslist().size() == 0) {
+                        if (list.size() == 0) {
                             getView().showFootView(false);
                             isNoMoreDatas = true;
                         } else {
@@ -97,12 +99,13 @@ public class WechatPresenter extends MvpRxPresenter<WechatView> {
                         getView().showFootView(false);
                     }
 
-                    getView().showError(ExceptionHandle.HTTP_ERROR, data.getMsg());
+                    getView().showError(ExceptionHandle.HTTP_ERROR, "服务器错误");
                 }
             }
         });
         addSubscription(subscribe);
 
     }
+
 
 }

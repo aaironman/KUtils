@@ -26,4 +26,11 @@ public class Constants {
 
 	public static final String KEY_API = "52b7ec3471ac3bec6846577e79f20e4c"; //需要APIKEY请去 http://www.tianapi.com/#wxnew 申请,复用会减少访问可用次数
 
+	public static final int TYPE_ANDROID = 102;
+
+	public static final int TYPE_IOS = 103;
+
+	public static final int TYPE_WEB = 104;
+
+	public static final int TYPE_GIRL = 105;
 }
