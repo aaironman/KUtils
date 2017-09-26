@@ -18,6 +18,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
     }
 }
@@ -40,7 +42,7 @@ ext {
     ptrLibVersion = "1.0.11"
     bottomBarLibVersion = "2.3.1"
     swipebackhelperLibVersion = "3.1.2"
-    glideLibVersion = "3.8.0"
+    glideLibVersion = "4.1.1"
     rxpermissionsLibVersion = "0.9.2@aar"
     pagerslidingtabstripLibVersion = "1.0.1"
     ultraPtrLibVersion = "1.0.11"

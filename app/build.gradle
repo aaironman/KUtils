@@ -57,12 +57,14 @@ dependencies {
     compile 'com.roughike:bottom-bar:' + rootProject.bottomBarLibVersion
     compile 'com.jude:swipebackhelper:' + rootProject.swipebackhelperLibVersion
     compile 'com.github.bumptech.glide:glide:' + rootProject.glideLibVersion
+    annotationProcessor 'com.github.bumptech.glide:compiler:' + rootProject.glideLibVersion
     compile 'com.tbruyelle.rxpermissions:rxpermissions:' + rootProject.rxpermissionsLibVersion
     compile 'com.astuetz:pagerslidingtabstrip:' + rootProject.pagerslidingtabstripLibVersion
     compile 'in.srain.cube:ultra-ptr:' + rootProject.ultraPtrLibVersion
     compile 'com.youth.banner:banner:' + rootProject.bannerLibVersion
     compile 'jp.wasabeef:glide-transformations:' + rootProject.glideTransformationsLibVersion
     compile 'com.yanzhenjie:recyclerview-swipe:' + rootProject.recyclerviewSwipeLibVersion
+
 }
 
 //apply from: "https://raw.githubusercontent.com/aaironman/KUtils/master/bintrayUpload.gradle"
