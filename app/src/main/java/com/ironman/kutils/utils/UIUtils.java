@@ -7,8 +7,6 @@ import android.widget.TextView;
 import com.ironman.kutils.R;
 import com.ironman.kutils.data.network.ExceptionHandle;
 import com.ironman.kutils.widget.MultiStateView;
-import com.ironman.kutils.widget.recylerview.RecyclerFooterView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -48,19 +46,6 @@ public class UIUtils {
 
     }
 
-    /**
-     * recycleView 加载更多
-     *
-     * @param context
-     * @param recyclerView
-     *
-     */
-    public static void recycleViewLoadForMore(Context context, SwipeMenuRecyclerView recyclerView) {
-        RecyclerFooterView footView = new RecyclerFooterView(context);
-        // 自定义的核心就是DefineLoadMoreView类。
-        recyclerView.addFooterView(footView); // 添加为Footer。
-        recyclerView.setLoadMoreView(footView); // 设置LoadMoreView更新监听。
-    }
 
 
     /**

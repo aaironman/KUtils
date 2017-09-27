@@ -2,8 +2,8 @@ package com.ironman.kutils.ui.gank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,10 @@ import com.ironman.kutils.model.gankModel.GankItemBean;
 import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
+import com.ironman.kutils.widget.recylerview.MyDividerItemDecoration;
+import com.ironman.kutils.widget.recylerview.RecyclerFooterView;
+import com.ironman.kutils.widget.recylerview.RecyclerOnScrollListener;
+import com.ironman.kutils.widget.recylerview.SmartRecyclerAdapter;
 import com.youth.banner.Banner;
 
 import java.util.List;
@@ -31,10 +33,10 @@ import in.srain.cube.views.ptr.PtrHandler;
  * 时间: 2017/9/26
  * 描述:
  */
-public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> implements AndroidView, SwipeMenuRecyclerView.LoadMoreListener {
+public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> implements AndroidView{
 
     @BindView(R.id.rv_daily)
-    SwipeMenuRecyclerView rvDaily;
+    RecyclerView rvDaily;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
     @BindView(R.id.ptr_frame)
@@ -43,6 +45,9 @@ public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> 
     private View headerView;
     private Banner banner;
     private TechAdapter adapter;
+
+    private SmartRecyclerAdapter smartRecyclerAdapter;
+    private RecyclerFooterView recyclerFooterView;
 
     public static IosFragment newInstance() {
         IosFragment fragment = new IosFragment();
@@ -74,8 +79,11 @@ public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> 
 //        banner.setLayoutParams(new FrameLayout.LayoutParams(w, w * 4 / 5));
 
         adapter = new TechAdapter(getActivity());
+        smartRecyclerAdapter = new SmartRecyclerAdapter(adapter);
+        recyclerFooterView = new RecyclerFooterView(getActivity());
+        smartRecyclerAdapter.setFooterView(recyclerFooterView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvDaily.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),0, 8));
+        rvDaily.addItemDecoration(new MyDividerItemDecoration(getActivity(),R.color.background_color,8));
         rvDaily.setLayoutManager(layoutManager);
 
 
@@ -92,11 +100,18 @@ public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> 
                 presenter.initData("iOS",false);
             }
         });
-
-        UIUtils.recycleViewLoadForMore(getActivity(),rvDaily);
-        rvDaily.setLoadMoreListener(this);
-        rvDaily.setAdapter(adapter);
+        rvDaily.setAdapter(smartRecyclerAdapter);
+        rvDaily.addOnScrollListener(mOnScrollListener);
     }
+
+    private RecyclerOnScrollListener mOnScrollListener = new RecyclerOnScrollListener() {
+
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+            presenter.loadForMore();
+        }
+    };
 
     @Override
     public void showLoading() {
@@ -127,7 +142,7 @@ public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> 
 
     @Override
     public void showFootView(boolean b) {
-        rvDaily.loadMoreFinish(false, b);
+        recyclerFooterView.setShowLoadView(b);
     }
 
     @Override
@@ -148,10 +163,5 @@ public class IosFragment extends MvpLazyFragment<AndroidView, AndroidPresenter> 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @Override
-    public void onLoadMore() {
-        presenter.loadForMore();
     }
 }

@@ -2,8 +2,8 @@ package com.ironman.kutils.ui.wechat;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +15,10 @@ import com.ironman.kutils.model.wechatModel.WXItemBean;
 import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
+import com.ironman.kutils.widget.recylerview.MyDividerItemDecoration;
+import com.ironman.kutils.widget.recylerview.RecyclerFooterView;
+import com.ironman.kutils.widget.recylerview.RecyclerOnScrollListener;
+import com.ironman.kutils.widget.recylerview.SmartRecyclerAdapter;
 
 import java.util.List;
 
@@ -32,20 +34,22 @@ import in.srain.cube.views.ptr.PtrHandler;
  * 时间: 2017/9/19
  * 描述:
  */
-public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> implements WechatView, SwipeMenuRecyclerView.LoadMoreListener {
+public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> implements WechatView {
 
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.rv_wechat)
-    SwipeMenuRecyclerView rvWechat;
+    RecyclerView rvWechat;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
     @BindView(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
 
     private WechatAdapter adapter;
+    private SmartRecyclerAdapter smartRecyclerAdapter;
+    private RecyclerFooterView recyclerFooterView;
 
     public static WechatFragment newInstance() {
         WechatFragment fragment = new WechatFragment();
@@ -70,8 +74,11 @@ public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> 
     private void initView(){
 
         adapter = new WechatAdapter(getActivity());
+        smartRecyclerAdapter = new SmartRecyclerAdapter(adapter);
+        recyclerFooterView = new RecyclerFooterView(getActivity());
+        smartRecyclerAdapter.setFooterView(recyclerFooterView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvWechat.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),0, 8));
+        rvWechat.addItemDecoration(new MyDividerItemDecoration(getActivity(),R.color.background_color,8));
         rvWechat.setLayoutManager(layoutManager);
 
 
@@ -89,12 +96,18 @@ public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> 
             }
         });
 
-        UIUtils.recycleViewLoadForMore(getActivity(),rvWechat);
-        rvWechat.setLoadMoreListener(this);
         rvWechat.setAdapter(adapter);
-
+        rvWechat.addOnScrollListener(mOnScrollListener);
     }
 
+    private RecyclerOnScrollListener mOnScrollListener = new RecyclerOnScrollListener() {
+
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+            presenter.loadForMore();
+        }
+    };
 
     @Override
     public void loadData() {
@@ -142,7 +155,7 @@ public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> 
 
     @Override
     public void showFootView(boolean b) {
-        rvWechat.loadMoreFinish(false, b);
+        recyclerFooterView.setShowLoadView(b);
     }
 
     @Override
@@ -150,8 +163,4 @@ public class WechatFragment extends MvpLazyFragment<WechatView,WechatPresenter> 
         adapter.addList(data);
     }
 
-    @Override
-    public void onLoadMore() {
-        presenter.loadForMore();
-    }
 }

@@ -2,8 +2,8 @@ package com.ironman.kutils.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +16,8 @@ import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.DensityUtil;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
+import com.ironman.kutils.widget.recylerview.MyDividerItemDecoration;
+import com.ironman.kutils.widget.recylerview.SmartRecyclerAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -38,7 +38,7 @@ import in.srain.cube.views.ptr.PtrHandler;
 public class DailyFragment extends MvpLazyFragment<DailyView,DailyPresenter> implements DailyView, OnBannerListener {
 
     @BindView(R.id.rv_daily)
-    SwipeMenuRecyclerView rvDaily;
+    RecyclerView rvDaily;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
     @BindView(R.id.ptr_frame)
@@ -48,6 +48,8 @@ public class DailyFragment extends MvpLazyFragment<DailyView,DailyPresenter> imp
 
     private View headerView;
     private Banner banner;
+
+    private SmartRecyclerAdapter smartRecyclerAdapter;
 
     public static DailyFragment newInstance() {
         DailyFragment fragment = new DailyFragment();
@@ -77,11 +79,12 @@ public class DailyFragment extends MvpLazyFragment<DailyView,DailyPresenter> imp
         banner.setLayoutParams(new FrameLayout.LayoutParams(w, w * 28 / 75));
 
         adapter = new DailyAdapter(getActivity());
+        smartRecyclerAdapter = new SmartRecyclerAdapter(adapter);
+        smartRecyclerAdapter.setHeaderView(headerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvDaily.addHeaderView(headerView);
-        rvDaily.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),0, 8));
+        rvDaily.addItemDecoration(new MyDividerItemDecoration(getActivity(), R.color.background_color, 8));
         rvDaily.setLayoutManager(layoutManager);
-        rvDaily.setAdapter(adapter);
+        rvDaily.setAdapter(smartRecyclerAdapter);
 
         UIUtils.ptrFrameAddHeader(getActivity(), ptrFrame);
         ptrFrame.disableWhenHorizontalMove(true);
@@ -97,6 +100,7 @@ public class DailyFragment extends MvpLazyFragment<DailyView,DailyPresenter> imp
             }
         });
     }
+
 
     @Override
     public void loadData() {

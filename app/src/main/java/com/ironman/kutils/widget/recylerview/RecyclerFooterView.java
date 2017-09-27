@@ -6,18 +6,16 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.ironman.kutils.R;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 
 /**
  * Created by 冯浩 on 2017/5/24.
  */
 
-public class RecyclerFooterView extends RelativeLayout implements SwipeMenuRecyclerView.LoadMoreView{
+public class RecyclerFooterView extends RelativeLayout {
 
 	RelativeLayout rlLoadingForMore;
 	RelativeLayout rlNoData;
-	private SwipeMenuRecyclerView.LoadMoreListener mLoadMoreListener;
 
 	public RecyclerFooterView(Context context) {
 		super(context);
@@ -58,28 +56,4 @@ public class RecyclerFooterView extends RelativeLayout implements SwipeMenuRecyc
 		rlNoData.setVisibility(View.GONE);
 	}
 
-	@Override
-	public void onLoading() {
-		rlLoadingForMore.setVisibility(View.VISIBLE);
-		rlNoData.setVisibility(View.GONE);
-	}
-
-	@Override
-	public void onLoadFinish(boolean dataEmpty, boolean hasMore) {
-		if (!hasMore) {
-			setShowLoadView(false);
-		} else {
-			setShowLoadView(true);
-		}
-	}
-
-	@Override
-	public void onWaitToLoadMore(SwipeMenuRecyclerView.LoadMoreListener loadMoreListener) {
-		this.mLoadMoreListener = loadMoreListener;
-	}
-
-	@Override
-	public void onLoadError(int errorCode, String errorMessage) {
-
-	}
 }

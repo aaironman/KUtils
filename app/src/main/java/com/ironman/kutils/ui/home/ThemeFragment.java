@@ -2,8 +2,8 @@ package com.ironman.kutils.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,8 @@ import com.ironman.kutils.model.zhihuModel.ThemeListBean;
 import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
+import com.ironman.kutils.widget.recylerview.DividerGridItemDecoration;
+import com.ironman.kutils.widget.recylerview.SmartRecyclerAdapter;
 
 import java.util.List;
 
@@ -34,14 +34,14 @@ public class ThemeFragment extends MvpLazyFragment<ThemeView, ThemePresenter> im
 
 
     @BindView(R.id.rv_theme)
-    SwipeMenuRecyclerView rvTheme;
+    RecyclerView rvTheme;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
     @BindView(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
 
     private ThemeAdapter adapter;
-//    private SmartRecyclerAdapter smartRecyclerAdapter;
+    private SmartRecyclerAdapter smartRecyclerAdapter;
 
     public static ThemeFragment newInstance() {
         ThemeFragment fragment = new ThemeFragment();
@@ -64,10 +64,12 @@ public class ThemeFragment extends MvpLazyFragment<ThemeView, ThemePresenter> im
 
     private void initView(){
         adapter = new ThemeAdapter(getActivity());
+        smartRecyclerAdapter = new SmartRecyclerAdapter(adapter);
+
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
-        rvTheme.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(getContext(), R.color.background_color),15,5));
+        rvTheme.addItemDecoration(new DividerGridItemDecoration(getActivity(),R.color.background_color,8));
         rvTheme.setLayoutManager(layoutManager);
-        rvTheme.setAdapter(adapter);
+        rvTheme.setAdapter(smartRecyclerAdapter);
 
         UIUtils.ptrFrameAddHeader(getActivity(), ptrFrame);
         ptrFrame.disableWhenHorizontalMove(true);

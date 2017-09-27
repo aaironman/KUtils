@@ -2,6 +2,7 @@ package com.ironman.kutils.ui.gank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import com.ironman.kutils.ui.base.MvpLazyFragment;
 import com.ironman.kutils.utils.UIUtils;
 import com.ironman.kutils.widget.MultiStateView;
 import com.ironman.kutils.widget.recylerview.DividerGridItemDecoration;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.ironman.kutils.widget.recylerview.RecyclerFooterView;
+import com.ironman.kutils.widget.recylerview.RecyclerOnScrollListener;
+import com.ironman.kutils.widget.recylerview.SmartRecyclerAdapter;
 
 import java.util.List;
 
@@ -29,17 +32,21 @@ import in.srain.cube.views.ptr.PtrHandler;
  * 时间: 2017/9/26
  * 描述:
  */
-public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresenter> implements WelfareView, SwipeMenuRecyclerView.LoadMoreListener
+public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresenter> implements WelfareView
 {
 
     @BindView(R.id.rv_daily)
-    SwipeMenuRecyclerView rvDaily;
+    RecyclerView rvDaily;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
     @BindView(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
 
     private GirlAdapter adapter;
+
+
+    private SmartRecyclerAdapter smartRecyclerAdapter;
+    private RecyclerFooterView recyclerFooterView;
 
     public static WelfareFragment newInstance() {
         WelfareFragment fragment = new WelfareFragment();
@@ -64,6 +71,10 @@ public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresente
 
     private void initView(){
         adapter = new GirlAdapter(getActivity());
+        smartRecyclerAdapter = new SmartRecyclerAdapter(adapter);
+        recyclerFooterView = new RecyclerFooterView(getActivity());
+        smartRecyclerAdapter.setFooterView(recyclerFooterView);
+
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         rvDaily.addItemDecoration(new DividerGridItemDecoration(getActivity(),R.drawable.line_divider,8));
@@ -84,10 +95,18 @@ public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresente
             }
         });
 
-        UIUtils.recycleViewLoadForMore(getActivity(),rvDaily);
-        rvDaily.setLoadMoreListener(this);
-        rvDaily.setAdapter(adapter);
+        rvDaily.setAdapter(smartRecyclerAdapter);
+        rvDaily.addOnScrollListener(mOnScrollListener);
     }
+
+    private RecyclerOnScrollListener mOnScrollListener = new RecyclerOnScrollListener() {
+
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+            presenter.loadForMore();
+        }
+    };
 
     @Override
     public void showLoading() {
@@ -118,7 +137,7 @@ public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresente
 
     @Override
     public void showFootView(boolean b) {
-        rvDaily.loadMoreFinish(false, b);
+        recyclerFooterView.setShowLoadView(b);
     }
 
     @Override
@@ -142,8 +161,4 @@ public class WelfareFragment extends MvpLazyFragment<WelfareView,WelfarePresente
         super.onDestroyView();
     }
 
-    @Override
-    public void onLoadMore() {
-        presenter.loadForMore();
-    }
 }
